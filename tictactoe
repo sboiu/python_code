@@ -1,0 +1,331 @@
+#!/bin/python3
+
+import os
+clear = lambda: os.system('clear')
+import random
+
+def line1(letter):
+	if letter == 'x':
+		return letters['x1']
+	elif letter == 'o': 
+		return letters['o1']
+	else:
+		return letters['s']	
+
+def line2(letter):
+	if letter == 'x':
+		return letters['x2']
+	elif letter == 'o': 
+		return letters['o2']
+	else:
+		return letters['s']	
+
+def line3(letter):
+	if letter == 'x':
+		return letters['x3']
+	elif letter == 'o': 
+		return letters['o3']
+	else:
+		return letters['s']		
+
+def line4(letter):
+	if letter == 'x':
+		return letters['x4']
+	elif letter == 'o': 
+		return letters['o4']
+	else:
+		return letters['s']	
+
+def line5(letter):
+	if letter == 'x':
+		return letters['x5']
+	elif letter == 'o': 
+		return letters['o5']
+	else:
+		return letters['s']		
+
+def board():
+	clear()
+	print('===========================')
+	print(dicto['c1l1'], end=''); print(dicto['c2l1'], end=''); print(dicto['c3l1'])
+	print(dicto['c1l2'], end=''); print(dicto['c2l2'], end=''); print(dicto['c3l2'])
+	print(dicto['c1l3'], end=''); print(dicto['c2l3'], end=''); print(dicto['c3l3'])
+	print(dicto['c1l4'], end=''); print(dicto['c2l4'], end=''); print(dicto['c3l4'])
+	print(dicto['c1l5'], end=''); print(dicto['c2l5'], end=''); print(dicto['c3l5'])
+	print('===========================')
+	print(dicto['c4l1'], end=''); print(dicto['c5l1'], end=''); print(dicto['c6l1'])
+	print(dicto['c4l2'], end=''); print(dicto['c5l2'], end=''); print(dicto['c6l2'])
+	print(dicto['c4l3'], end=''); print(dicto['c5l3'], end=''); print(dicto['c6l3'])
+	print(dicto['c4l4'], end=''); print(dicto['c5l4'], end=''); print(dicto['c6l4'])
+	print(dicto['c4l5'], end=''); print(dicto['c5l5'], end=''); print(dicto['c6l5'])
+	print('===========================')
+	print(dicto['c7l1'], end=''); print(dicto['c8l1'], end=''); print(dicto['c9l1'])
+	print(dicto['c7l2'], end=''); print(dicto['c8l2'], end=''); print(dicto['c9l2'])
+	print(dicto['c7l3'], end=''); print(dicto['c8l3'], end=''); print(dicto['c9l3'])
+	print(dicto['c7l4'], end=''); print(dicto['c8l4'], end=''); print(dicto['c9l4'])
+	print(dicto['c7l5'], end=''); print(dicto['c8l5'], end=''); print(dicto['c9l5'])
+	print('===========================')
+
+def locate(position, player):
+	if position =='1':
+		dicto['c1l1'] = line1(player); dicto['c1l2'] = line2(player); dicto['c1l3'] = line3(player); dicto['c1l4'] = line4(player); dicto['c1l5'] = line5(player)
+	elif position == '2':
+		dicto['c2l1'] = line1(player); dicto['c2l2'] = line2(player); dicto['c2l3'] = line3(player); dicto['c2l4'] = line4(player); dicto['c2l5'] = line5(player)
+	elif position == '3':
+		dicto['c3l1'] = line1(player); dicto['c3l2'] = line2(player); dicto['c3l3'] = line3(player); dicto['c3l4'] = line4(player); dicto['c3l5'] = line5(player)
+	elif position == '4':
+		dicto['c4l1'] = line1(player); dicto['c4l2'] = line2(player); dicto['c4l3'] = line3(player); dicto['c4l4'] = line4(player); dicto['c4l5'] = line5(player)
+	elif position == '5':
+		dicto['c5l1'] = line1(player); dicto['c5l2'] = line2(player); dicto['c5l3'] = line3(player); dicto['c5l4'] = line4(player); dicto['c5l5'] = line5(player)
+	elif position == '6':
+		dicto['c6l1'] = line1(player); dicto['c6l2'] = line2(player); dicto['c6l3'] = line3(player); dicto['c6l4'] = line4(player); dicto['c6l5'] = line5(player)
+	elif position == '7':
+		dicto['c7l1'] = line1(player); dicto['c7l2'] = line2(player); dicto['c7l3'] = line3(player); dicto['c7l4'] = line4(player); dicto['c7l5'] = line5(player)
+	elif position == '8':
+		dicto['c8l1'] = line1(player); dicto['c8l2'] = line2(player); dicto['c8l3'] = line3(player); dicto['c8l4'] = line4(player); dicto['c8l5'] = line5(player)
+	elif position == '9':
+		dicto['c9l1'] = line1(player); dicto['c9l2'] = line2(player); dicto['c9l3'] = line3(player); dicto['c9l4'] = line4(player); dicto['c9l5'] = line5(player)
+
+def singleplayer(player1, player2):
+	while list1 != list2:
+		position = input('\nNow Player1 choose a position [1-9]: ')
+		flag = 0
+		while flag == 0:
+			if position in list1:
+				locate(position, player1)
+				flag = 1	
+			else:
+				position = input('This position was already selected.\nPlease select a FREE one: ')
+				
+		j=0
+		for i in winlist:
+			if i == position:
+				winlist[j] = player1
+				break
+			j+=1
+		j=0
+		for i in list1:
+			if i == position:
+				del list1[j]
+				break
+			j+=1
+		
+		board()
+		if winlist[0]==winlist[1]==winlist[2]==player1 or winlist[3]==winlist[4]==winlist[5]==player1 or winlist[6]==winlist[7]==winlist[8]==player1 or winlist[0]==winlist[3]==winlist[6]==player1 or winlist[1]==winlist[4]==winlist[7]==player1 or winlist[2]==winlist[5]==winlist[8]==player1 or winlist[0]==winlist[4]==winlist[8]==player1 or winlist[2]==winlist[4]==winlist[6]==player1:
+			print(' '*27+'*'*33)
+			print(' '*27+'* Congratulations: Player1 WIN! *')
+			print(' '*27+'*'*33)
+			break
+		elif list1 == list2:
+			print(' '*27+'*'*33)
+			print(' '*27+'*'+' '*9+"It's a DRAW"+' '*11+'*')
+			print(' '*27+'*'*33)
+			break
+
+		
+		if winlist[0]==winlist[1]==player2 or winlist[0]==winlist[1]==player1:
+			position = '3'
+		elif winlist[0]==winlist[3]==player2 or winlist[0]==winlist[3]==player1:
+			position = '7'
+		elif winlist[0]==winlist[4]==player2 or winlist[0]==winlist[4]==player1:
+			position = '9'
+		elif winlist[0]==winlist[2]==player2 or winlist[0]==winlist[2]==player1:
+			position = '2'
+		elif winlist[0]==winlist[8]==player2 or winlist[0]==winlist[8]==player1:
+			position = '5'
+		elif winlist[0]==winlist[6]==player2 or winlist[0]==winlist[6]==player1:
+			position = '4'
+		elif winlist[1]==winlist[2]==player2 or winlist[1]==winlist[2]==player1:
+			position = '1'
+		elif winlist[1]==winlist[4]==player2 or winlist[1]==winlist[4]==player1:
+			position = '8'
+		elif winlist[1]==winlist[7]==player2 or winlist[1]==winlist[7]==player1:
+			position = '5'
+		elif winlist[2]==winlist[5]==player2 or winlist[2]==winlist[5]==player1:
+			position = '9'
+		elif winlist[2]==winlist[4]==player2 or winlist[2]==winlist[4]==player1:
+			position = '7'
+		elif winlist[2]==winlist[8]==player2 or winlist[2]==winlist[8]==player1:
+			position = '6'
+		elif winlist[2]==winlist[6]==player2 or winlist[2]==winlist[6]==player1:
+			position = '5'
+		elif winlist[3]==winlist[6]==player2 or winlist[3]==winlist[6]==player1:
+			position = '1'
+		elif winlist[3]==winlist[4]==player2 or winlist[3]==winlist[4]==player1:
+			position = '6'
+		elif winlist[3]==winlist[5]==player2 or winlist[3]==winlist[5]==player1:
+			position = '5'
+		elif winlist[5]==winlist[8]==player2 or winlist[5]==winlist[8]==player1:
+			position = '3'
+		elif winlist[5]==winlist[4]==player2 or winlist[5]==winlist[4]==player1:
+			position = '4'
+		elif winlist[6]==winlist[7]==player2 or winlist[6]==winlist[7]==player1:
+			position = '9'
+		elif winlist[6]==winlist[4]==player2 or winlist[6]==winlist[4]==player1:
+			position = '3'
+		elif winlist[6]==winlist[8]==player2 or winlist[6]==winlist[8]==player1:
+			position = '8'
+		elif winlist[7]==winlist[8]==player or winlist[7]==winlist[8]==player1:
+			position = '7'
+		elif winlist[7]==winlist[4]==player2 or winlist[7]==winlist[4]==player1:
+			position = '2'
+		elif winlist[8]==winlist[4]==player2 or winlist[8]==winlist[4]==player1:
+			position = '1'	
+		else:
+			position = random.choice(list1)
+		
+		flag = 0
+		while flag == 0:
+			if position in list1:
+				locate(position, player2)
+				flag = 1	
+			else:
+				position = random.choice(list1)
+		board()
+		j=0
+		for i in winlist:
+			if i == position:
+				winlist[j] = player2
+				break
+			j+=1
+		j=0
+		for i in list1:
+			if i == position:
+				del list1[j]
+				break
+			j+=1
+
+		board()
+
+		if winlist[0]==winlist[1]==winlist[2]==player2 or winlist[3]==winlist[4]==winlist[5]==player2 or winlist[6]==winlist[7]==winlist[8]==player2 or winlist[0]==winlist[3]==winlist[6]==player2 or winlist[1]==winlist[4]==winlist[7]==player2 or winlist[2]==winlist[5]==winlist[8]==player2 or winlist[0]==winlist[4]==winlist[8]==player2 or winlist[2]==winlist[4]==winlist[6]==player2:
+			print(' '*27+'*'*34)
+			print(' '*27+'* Congratulations: Computer WIN! *')
+			print(' '*27+'*'*34)
+			break
+			
+def multiplayer(player1, player2):
+	while list1 != list2:
+		position = input('\nNow Player1 choose a position [1-9]: ')
+		flag = 0
+		while flag == 0:
+			if position in list1:
+				locate(position, player1)
+				flag = 1	
+			else:
+				position = input('This position was already selected.\nPlease select a FREE one: ')
+				
+		j=0
+		for i in winlist:
+			if i == position:
+				winlist[j] = player1
+				break
+			j+=1
+		j=0
+		for i in list1:
+			if i == position:
+				del list1[j]
+				break
+			j+=1
+		
+		board()
+		if winlist[0]==winlist[1]==winlist[2]==player1 or winlist[3]==winlist[4]==winlist[5]==player1 or winlist[6]==winlist[7]==winlist[8]==player1 or winlist[0]==winlist[3]==winlist[6]==player1 or winlist[1]==winlist[4]==winlist[7]==player1 or winlist[2]==winlist[5]==winlist[8]==player1 or winlist[0]==winlist[4]==winlist[8]==player1 or winlist[2]==winlist[4]==winlist[6]==player1:
+			print(' '*27+'*'*33)
+			print(' '*27+'* Congratulations: Player1 WIN! *')
+			print(' '*27+'*'*33)
+			break
+		elif list1 == list2:
+			print(' '*27+'*'*33)
+			print(' '*27+'*'+' '*9+"It's a DRAW"+' '*11+'*')
+			print(' '*27+'*'*33)
+			break
+		
+		position = input('\nNow Player2 choose a position [1-9]: ')
+		flag = 0
+		while flag == 0:
+			if position in list1:
+				locate(position, player2)
+				flag = 1	
+			else:
+				position = input('This position was already selected.\nPlease select a FREE one: ')
+		board()
+		j=0
+		for i in winlist:
+			if i == position:
+				winlist[j] = player2
+				break
+			j+=1
+		j=0
+		for i in list1:
+			if i == position:
+				del list1[j]
+				break
+			j+=1
+
+		board()
+
+		if winlist[0]==winlist[1]==winlist[2]==player2 or winlist[3]==winlist[4]==winlist[5]==player2 or winlist[6]==winlist[7]==winlist[8]==player2 or winlist[0]==winlist[3]==winlist[6]==player2 or winlist[1]==winlist[4]==winlist[7]==player2 or winlist[2]==winlist[5]==winlist[8]==player2 or winlist[0]==winlist[4]==winlist[8]==player2 or winlist[2]==winlist[4]==winlist[6]==player2:
+			print(' '*27+'*'*33)
+			print(' '*27+'* Congratulations: Player2 WIN! *')
+			print(' '*27+'*'*33)
+			break
+
+
+letters = {'x1':' *   * ||', 'x2':'  * *  ||', 'x3':'   *   ||', 'x4':'  * *  ||', 'x5':' *   * ||', 'o1':'  ***  ||', 'o2':' *   * ||', 'o3':' *   * ||', 'o4':' *   * ||', 'o5':'  ***  ||', 's':'       ||'}
+s = ' '
+dicto = {'c1l1':line1(s), 'c1l2':line2(s), 'c1l3':line3(s), 'c1l4':line4(s), 'c1l5':line5(s), 'c2l1':line1(s), 'c2l2':line2(s), 'c2l3':line3(s), 'c2l4':line4(s), 'c2l5':line5(s),'c3l1':line1(s), 'c3l2':line2(s), 'c3l3':line3(s), 'c3l4':line4(s), 'c3l5':line5(s),'c4l1':line1(s), 'c4l2':line2(s), 'c4l3':line3(s), 'c4l4':line4(s), 'c4l5':line5(s),'c5l1':line1(s), 'c5l2':line2(s), 'c5l3':line3(s), 'c5l4':line4(s), 'c5l5':line5(s),'c6l1':line1(s), 'c6l2':line2(s), 'c6l3':line3(s), 'c6l4':line4(s), 'c6l5':line5(s),'c7l1':line1(s), 'c7l2':line2(s), 'c7l3':line3(s), 'c7l4':line4(s), 'c7l5':line5(s),'c8l1':line1(s), 'c8l2':line2(s), 'c8l3':line3(s), 'c8l4':line4(s), 'c8l5':line5(s),'c9l1':line1(s), 'c9l2':line2(s), 'c9l3':line3(s), 'c9l4':line4(s), 'c9l5':line5(s)}
+list1 = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+list2 = []
+winlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+repeat = 'yes'
+
+clear()
+print('*'*75)
+print('  This is TicTacToe 1.0 game create by Stefan Boiu junior on 16 Nov 2019')
+print('*'*75)
+print('\nInstructions:\n')
+print('Player1 will choose "x" or "o". ')
+print('Then each player will choose the position on the board, which will be filled up with the player sign.')
+print('Positions are enumerated from 1 to 9. 1 is the top-left position and 9 is the bottom-right position')
+print(' '*40+'1|2|3')
+print(' '*40+'4|5|6')
+print(' '*40+'7|8|9')
+try:
+    input('GOOD LUCK! Press ENTER to continue!')
+except SyntaxError:
+    pass
+clear()
+
+print('Please choose:')
+
+print('[1]: Singleplayer mode')
+print('[2]: Multiplayer mode')
+mode = input('>>> ')
+while mode not in ['1', '2']:
+	mode = input('Choose [1] Singleplayer or [2] Multiplayer: ')
+	clear()
+
+player1 = input("Player 1 choose ('x' or 'o'): ")
+
+while player1 not in ['x', 'o']:
+	player1 = input("Player 1 choose ('x' or 'o'): ")
+	clear()
+
+if player1 == 'x':
+	player2 = 'o'
+else:
+	player1 = 'o'; player2 = 'x'
+
+
+if mode == '1':
+	board()
+	singleplayer(player1, player2)
+		
+	
+else:
+	board()
+	multiplayer(player1, player2)
+		
+	
+
+
+
